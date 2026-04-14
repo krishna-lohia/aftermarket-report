@@ -69,6 +69,26 @@
       border-radius: 8px; border: 1px solid #f0f0f0;
     }
 
+    /* ── COPY BUTTON ── */
+    .copy-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 16px; background: #387ED1; color: #fff;
+      font-size: 13px; font-weight: 600; border-radius: 6px;
+      border: none; cursor: pointer; white-space: nowrap;
+    }
+    .copy-btn:hover { background: #2d6db8; }
+    .copy-btn.copied { background: #4CAF52; }
+    .copy-toast {
+      position: fixed; bottom: 24px; left: 50%;
+      transform: translateX(-50%);
+      background: #222; color: #fff;
+      padding: 10px 20px; border-radius: 6px;
+      font-size: 13px; font-weight: 500;
+      opacity: 0; transition: opacity 0.3s;
+      pointer-events: none; z-index: 999;
+    }
+    .copy-toast.show { opacity: 1; }
+
     /* ── FOOTER ── */
     .nl-footer {
       border-top: 1px solid #e7e7e7;
@@ -102,7 +122,10 @@
 </svg>
         <div class="nl-brand-name">Aftermarket Report</div>
       </div>
-      <div class="nl-date">Monday, 13 April 2026</div>
+      <div style="display:flex;align-items:center;gap:16px;">
+        <button class="copy-btn" id="copy-btn" onclick="copyForSubstack()">Copy for Substack</button>
+        <div class="nl-date">Monday, 13 April 2026</div>
+      </div>
     </div>
 
     <!-- Headline -->
@@ -1256,5 +1279,43 @@
     </p>
 
   </div>
+
+  <!-- Toast notification -->
+  <div class="copy-toast" id="copy-toast">✓ Copied! Paste into your Substack draft.</div>
+
+  <script>
+    // Substack-ready HTML (images hosted on GitHub Pages)
+    const SUBSTACK_HTML = "<p><em>Zerodha Aftermarket Report — Monday, 13 April 2026</em></p><h1>Nifty slips 0.86% to 23,842.65</h1><hr><h2>Market Overview</h2><p>Monday was a rough day for Indian stocks. Nifty 50, the benchmark index of India's 50 largest companies, closed at 23,842.65, fell 208 points (-0.86%) from the previous session.</p><p>The Sensex, which tracks 30 large BSE-listed companies and often moves in lockstep with Nifty, fell 0.91% to 76,847.57.</p><p>Bank Nifty moved broadly in line with the market, fell 0.55% to 55,605.05.</p><p>Market breadth, which tells you how many stocks fell versus rose, was poor today. 6,156 stocks declined against only 2,456 that advanced, out of 8,642 tracked. When more stocks fall than rise, even as the index holds up, it is worth paying attention. A 2.5:1 decline-to-advance ratio signals broad-based selling, not just weakness in a few index heavyweights.</p><p><img src=\"https://krishna-lohia.github.io/aftermarket-report/images/2026-04-13/section-01-market.png\" style=\"max-width:680px;width:100%;display:block;\"></p><hr><h2>Sectoral Indices</h2><p><img src=\"https://krishna-lohia.github.io/aftermarket-report/images/2026-04-13/section-02-sectors.png\" style=\"max-width:680px;width:100%;display:block;\"></p><hr><h2>Top Gainers &amp; Losers</h2><p>Across sectors, the picture was mixed. Nifty Energy (+0.06%) led the gains. At the other end, Nifty Auto fell 2.09%, making it the day's worst-performing sector. Overall, 1 of 12 sectors closed in the green.</p><p>Midcaps tracked large-caps closely — Nifty Midcap Select fell 1.02%.</p><p><img src=\"https://krishna-lohia.github.io/aftermarket-report/images/2026-04-13/section-03-gainers.png\" style=\"max-width:680px;width:100%;display:block;\"></p><hr><h2>Commodity Futures</h2><p>Crude oil rose 1.25% to ₹9,267 per barrel. A mild rise, not alarming on its own, but worth tracking given India's import dependency.</p><p>Gold fell 0.27% to ₹1,52,245/10g; silver similarly dropped 0.95% to ₹2,40,955/kg.</p><p>The rupee weakened to 93.5 against the dollar (+2.16%). A weaker rupee makes imports costlier (especially crude oil) but is actually good for IT and pharma companies that earn in dollars — their revenues look bigger in rupee terms.</p><p><img src=\"https://krishna-lohia.github.io/aftermarket-report/images/2026-04-13/section-04-commodities.png\" style=\"max-width:680px;width:100%;display:block;\"></p><hr><h2>Institutional Flows</h2><p>Foreign institutional investors, known as FIIs, are the large global funds, hedge funds, and sovereign wealth funds that invest in Indian markets. They sold a net ₹1,983 Cr worth of Indian stocks today. This is a modest outflow, not alarming on its own, but worth tracking as part of the bigger picture.</p><p>Domestic institutional investors, or DIIs, are primarily Indian mutual funds, insurance companies, and pension funds. They bought ₹2,432 Cr today. DIIs absorbing FII selling is a key dynamic in the current market. Domestic money has increasingly become the floor that limits foreign-driven weakness.</p><p><img src=\"https://krishna-lohia.github.io/aftermarket-report/images/2026-04-13/section-05-fii-dii.png\" style=\"max-width:680px;width:100%;display:block;\"></p><hr><h2>Change in OI</h2><p>The options market is where traders place bets on where Nifty is headed, and reading it gives us a sense of where the so-called smart money expects resistance and support to emerge.</p><p>The largest concentration of call option sellers is at 23,850. Call sellers profit when Nifty stays below that level, so they have a financial incentive to defend it. Think of it as a ceiling for now. On the other side, the biggest cluster of put sellers is at 23,800. Put sellers profit when Nifty stays above it, so that is the floor they are defending.</p><p>The put-call ratio stands at 1.25, which is mildly bullish. PCR measures how many put options (downside bets and hedges) are open compared to calls (upside bets). A reading above 1 means more traders are writing puts, which is typically a bullish sign. It means they are comfortable selling downside protection.</p><p>On the chart, two levels matter most: the 21-day EMA (23,566.24) and the 50-day EMA (24,287.53). These are exponential moving averages — basically a smoothed-out average of recent closing prices that traders use as a gauge of trend direction.</p><p>Nifty is above its 21-day EMA at 23,566.24, which is a short-term positive. However, it is still below the 50-day EMA at 24,287.53, meaning the medium-term trend is still pointing down. A close above 24,287.53 would be the clearer signal that things are genuinely turning around.</p><p>India VIX, commonly called the fear index, closed at 20.50 today, up 8.75% from the previous session. VIX measures how much near-term volatility options traders are pricing in. A reading above 20 is elevated. It means the market is pricing in continued turbulence, and traders should expect larger-than-usual daily swings.</p><p><img src=\"https://krishna-lohia.github.io/aftermarket-report/images/2026-04-13/section-06-oi-spurts.png\" style=\"max-width:680px;width:100%;display:block;\"></p><hr><h2>Nifty Options — OI by Strike</h2><p><img src=\"https://krishna-lohia.github.io/aftermarket-report/images/2026-04-13/section-07-oi-strikes.png\" style=\"max-width:680px;width:100%;display:block;\"></p><hr><h2>Niche Indices</h2><p><img src=\"https://krishna-lohia.github.io/aftermarket-report/images/2026-04-13/section-08-niche.png\" style=\"max-width:680px;width:100%;display:block;\"></p><hr><h2>What's Coming Up</h2><p>Tomorrow's key data to watch: WPI Inflation (previous: 2.13 YoY%). Later this week: Inflation (Final) (Italy) (previous: 1.5 YoY%) on 16 Apr and Inflation (Final) (Euro area) (previous: 1.9 YoY%) on 16 Apr. On the corporate actions calendar: AUROPHARMA (Buy Back, ex-date 17 Apr) and MUTHOOTFIN (Interim Dividend - Rs 30 Per Share, ex-date 17 Apr).</p><p><img src=\"https://krishna-lohia.github.io/aftermarket-report/images/2026-04-13/section-09-calendar.png\" style=\"max-width:680px;width:100%;display:block;\"></p><hr><h2>Corporate Actions</h2><p><img src=\"https://krishna-lohia.github.io/aftermarket-report/images/2026-04-13/section-10-corporate.png\" style=\"max-width:680px;width:100%;display:block;\"></p><hr><h2>Key Levels to Watch Tomorrow</h2><p>For tomorrow, the key range to track on Nifty is 23,800 on the downside and 23,850 on the upside. Those are the levels where large option positions are concentrated, and they tend to act as natural anchors for price. A sustained break beyond either level could meaningfully accelerate the move in that direction.</p><hr><p><em>Published by Zerodha. Not investment advice. Data from NSE, BSE, MCX.</em></p>";
+
+    async function copyForSubstack() {
+      const btn   = document.getElementById('copy-btn');
+      const toast = document.getElementById('copy-toast');
+      try {
+        await navigator.clipboard.write([
+          new ClipboardItem({
+            'text/html':  new Blob([SUBSTACK_HTML], { type: 'text/html' }),
+            'text/plain': new Blob([SUBSTACK_HTML], { type: 'text/plain' }),
+          })
+        ]);
+      } catch (e) {
+        // Fallback for browsers that don't support ClipboardItem
+        const ta = document.createElement('textarea');
+        ta.value = SUBSTACK_HTML;
+        ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none;';
+        document.body.appendChild(ta);
+        ta.focus(); ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+      btn.textContent = '✓ Copied!';
+      btn.classList.add('copied');
+      toast.classList.add('show');
+      setTimeout(() => {
+        btn.textContent = 'Copy for Substack';
+        btn.classList.remove('copied');
+        toast.classList.remove('show');
+      }, 4000);
+    }
+  </script>
 </body>
 </html>
